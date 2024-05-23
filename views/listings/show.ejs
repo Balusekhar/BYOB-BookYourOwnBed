@@ -1,0 +1,32 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-4 text-center"><%= specificListing.title %></h1>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-md-8">
+                <div class="card shadow-lg" style="border-radius: 15px;"> <!-- Apply border-radius to card -->
+                    <img src="<%= specificListing.image %>" class="card-img-top show-img" alt="Listing Image">
+                    <div class="card-body">
+                        <h5 class="card-title px-3"><%= specificListing.title %></h5>
+                        <p class="card-text px-3"><%= specificListing.description %></p>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item"><b>Price: </b> ₹<%= specificListing.price.toLocaleString("en-IN") %></li>
+                            <li class="list-group-item"><b>Location: </b> <%= specificListing.location %></li>
+                            <li class="list-group-item"><b>Country: </b> <%= specificListing.country %></li>
+                        </ul>
+                        <div class="card-body text-center mb-3">
+                            <a href="/listings/<%=specificListing._id%>/edit" class="btn btn-secondary">Edit Listing</a>
+                            <form action="/listings/<%=specificListing._id%>?_method=DELETE" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-danger">Delete Listing</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

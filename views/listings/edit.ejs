@@ -1,0 +1,43 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+  <div class="row">
+    <div class="col-8 offset-2">
+        <h1 class="mb-3 mt-3 text-center">Edit the Listing</h1>
+        <!-- Change the form action to submit to the specific listing ID and use the POST method which will be overridden to PUT -->
+        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label> 
+                <!-- Pre-fill the value of each input with the existing data -->
+                <input type="text" class="form-control" id="title" name="title" required value="<%= listing.title %>">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" required><%= listing.description %></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image URL:</label>
+                <input class="form-control" type="text" id="image" name="image" value="<%= listing.image %>">
+            </div>
+
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label class="form-label" for="price">Price:</label>
+                    <input class="form-control" type="number" id="price" name="price" required min="0" value="<%= listing.price %>">
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label class="form-label" for="location">Location:</label>
+                    <input class="form-control" type="text" id="location" name="location" required value="<%= listing.location %>">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="country">Country:</label>
+                <input class="form-control" type="text" id="country" name="country" required value="<%= listing.country %>">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Update Listing</button>
+            </div>
+        </form>
+    </div>
+  </div>
+</body>
