@@ -4,7 +4,7 @@
     <div class="col-8 offset-2">
         <h1 class="mb-3 mt-3 text-center">Edit the Listing</h1>
         <!-- Change the form action to submit to the specific listing ID and use the POST method which will be overridden to PUT -->
-        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
+        <form action="/listings/<%= listing._id %>?_method=PUT" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
                 <label for="title" class="form-label">Title:</label> 
                 <!-- Pre-fill the value of each input with the existing data -->
@@ -40,4 +40,5 @@
         </form>
     </div>
   </div>
+  <script src="/js/script.js"></script>
 </body>
