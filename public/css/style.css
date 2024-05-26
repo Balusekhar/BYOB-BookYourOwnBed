@@ -1,63 +1,58 @@
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: "Plus Jakarta Sans", sans-serif !important;
-    font-optical-sizing: auto;
-    font-style: normal;
-  }
-
-.container{
-    flex:1;
-}
-  
-.nav-link{
-    color: #222222;
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
-.navbar{
-    background-color: #fff;
+.container {
+  flex: 1;
+}
+
+.nav-link {
+  color: #222222;
+}
+
+.navbar {
+  background-color: #fff;
 }
 
 /* Cards */
-.card{
-    border-radius: 15px; /* Rounded corners */
-    overflow: hidden; /* Ensures the image doesn't bleed outside the border-radius */
-    transition: transform 0.3s; /* Smooth transition for hover effect */
-    margin-bottom: 0rem !important;
+.card {
+  border-radius: 15px; /* Rounded corners */
+  overflow: hidden; /* Ensures the image doesn't bleed outside the border-radius */
+  transition: transform 0.3s; /* Smooth transition for hover effect */
+  margin-bottom: 0rem !important;
 }
 
-.card-img-top{
-    border-radius: 1rem !important;
-    width: 100% !important ;
-    object-fit: cover !important;
-    width: 100%;
-    height: 300px; /* Fixed height for consistency */
+.card-img-top {
+  /* border-radius: 1rem !important; */
+  width: 100% !important ;
+  object-fit: cover !important;
+  width: 100%;
+  height: 300px; /* Fixed height for consistency */
 }
 
-.card-body{
-    padding: 0 !important;
+.card-body {
+  padding: 0 !important;
 }
 
-.card-text p{
-    font-weight: 400 !important;
+.card-text p {
+  font-weight: 400 !important;
 }
 
-.card:hover {
-    transform: scale(1.05); /* Slightly enlarge cards on hover */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); /* Adding shadow effect on hover */
-  }
-
-  .card-footer {
-    background: inherit; /* Footer blends with the card body */
-    border-top: 0; /* Removes the border between body and footer */
-  }
-  .text-muted {
-    font-size: 1.1rem; /* Slightly larger font size for pricing */
-  }
-  .cursor-pointer {
-    cursor: pointer; /* Changes cursor to pointer on hover over the card */
-  }
+.card-footer {
+  background: inherit; /* Footer blends with the card body */
+  border-top: 0; /* Removes the border between body and footer */
+}
+.text-muted {
+  font-size: 1.1rem; /* Slightly larger font size for pricing */
+}
+.cursor-pointer {
+  cursor: pointer; /* Changes cursor to pointer on hover over the card */
+}
 
 /* .card-img-overlay{
     opacity: 0;
@@ -70,15 +65,85 @@ body{
 
 /* ShowPage */
 .show-img {
-    height: 40vh;
-    object-fit: cover; /* Ensures the image covers the area without being stretched */
-    margin-bottom: 1rem; /* Adds margin below the image */
-    border-top-left-radius: 15px; /* Top-left radius */
-    border-top-right-radius: 15px; /* Top-right radius */
+  height: 40vh;
+  object-fit: cover; /* Ensures the image covers the area without being stretched */
+  margin-bottom: 1rem; /* Adds margin below the image */
+  border-top-left-radius: 15px; /* Top-left radius */
+  border-top-right-radius: 15px; /* Top-right radius */
 }
 .card-body {
-    padding: 2rem; 
+  padding: 2rem;
 }
 .card {
-    border-radius: 15px; 
+  border-radius: 15px;
+}
+
+/* Review Form */
+.review-form {
+  width: 100%;
+  max-width: 900px;
+  /* background: #fff; */
+  background: var(--bs-card-color);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.review-form h3 {
+  margin-bottom: 15px;
+}
+
+.review-form textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.review-form select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.review-form button {
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Review Card */
+.review-card {
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  background-color: #ffffff;
+}
+
+.review-card .card-body {
+  padding: 20px;
+}
+
+.review-card .card-title {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.review-card .card-text {
+  font-size: 1rem;
+  color: #666;
+}
+
+.review {
+  padding: 15px;
+}
+
+.reviews-section h4{
+    padding: 10px;
 }

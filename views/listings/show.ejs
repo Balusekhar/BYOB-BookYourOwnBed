@@ -8,7 +8,7 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-md-8">
-                <div class="card shadow-lg" style="border-radius: 15px;"> <!-- Apply border-radius to card -->
+                <div class="card" style="border-radius: 15px;"> 
                     <img src="<%= specificListing.image %>" class="card-img-top show-img" alt="Listing Image">
                     <div class="card-body">
                         <h5 class="card-title px-3"><%= specificListing.title %></h5>
@@ -24,6 +24,43 @@
                                 <button type="submit" class="btn btn-danger">Delete Listing</button>
                             </form>
                         </div>
+                    </div>
+                </div>
+                <div class="review-form mt-4">
+                    <h3>Add a Review</h3>
+                    <form class="needs-validation" action="/listings/<%= specificListing._id %>/reviews" method="POST" novalidate>
+                        <textarea class="form-control" name="comment" placeholder="Write your review here..." required></textarea>
+                        <div class="invalid-feedback">
+                            Please provide a review.
+                        </div>
+                        <select name="rating" class="form-control mt-2">
+                            <option value="">Select a rating</option>
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                        <button class="btn btn-primary mt-2" style="background-color: #F63659;" type="submit">Submit Review</button>
+                    </form>
+                </div>
+                <div class="card reviews-section mt-4">
+                    <div class="card-body">
+                        <h4>Customer Reviews</h4>
+                        <% if (specificListing.reviews && specificListing.reviews.length > 0) { %>
+                            <% specificListing.reviews.forEach(review => { %>
+                                <div class="review">
+                                    <p><strong>Rating:</strong> <%= review.rating %> Stars</p>
+                                    <p><strong>Comment:</strong> <%= review.comment %></p>
+                                    <form action="/listings/<%= specificListing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>                                    
+                                    <hr>
+                                </div>
+                            <% }); %>
+                        <% } else { %>
+                            <p>No reviews yet.</p>
+                        <% } %>
                     </div>
                 </div>
             </div>

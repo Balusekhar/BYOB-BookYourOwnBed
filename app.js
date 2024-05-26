@@ -8,6 +8,8 @@ const ejsMate = require("ejs-mate");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
 const {listingSchema} = require("./schema")
+const {reviewSchema} = require("./schema")
+const Review = require("./models/review");
 
 main()
   .then(() => {
@@ -28,6 +30,7 @@ app.use(methodOvveride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+//using joi to validate schema
 const validateListing = (req,res,next) => {
     let {error} = listingSchema.validate(req.body)
     if(error){
@@ -35,6 +38,15 @@ const validateListing = (req,res,next) => {
     }else{
         next()
     }
+}
+
+const validateReview = (req,res,next) => {
+  let {error} = reviewSchema.validate(req.body)
+  if(error){
+      throw new ExpressError(400,error)
+  }else{
+      next()
+  }
 }
 
 app.get(
@@ -76,7 +88,7 @@ app.get(
   "/listings/:id",
   wrapAsync(async (req, res) => {
     const id = req.params.id;
-    const specificListing = await Listing.findById(id);
+    const specificListing = await Listing.findById(id).populate("reviews");
     res.render("listings/show.ejs", { specificListing });
   })
 );
@@ -119,6 +131,30 @@ app.delete(
     res.redirect("/listings");
   })
 );
+
+//delete review
+app.delete("/listings/:id/reviews/:reviewid",wrapAsync(async(req,res)=>{
+  let {id, reviewid} = req.params
+  console.log(id,reviewid);
+
+  await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewid } });
+  await Review.findByIdAndDelete(reviewid);
+  res.redirect(`/listings/${id}`)
+}))
+
+// Review Route
+app.post("/listings/:id/reviews",validateReview,wrapAsync(async(req,res)=>{
+  let listing = await Listing.findById(req.params.id)
+  let {comment, rating} = req.body;
+
+  let newReview = new Review({
+    comment,rating
+  })
+  await newReview.save();
+  listing.reviews.push(newReview._id)
+  await listing.save()
+  res.redirect(`/listings/${listing._id}`)
+}))
 
 app.get("/", (req, res) => {
   res.send("I am Home");
