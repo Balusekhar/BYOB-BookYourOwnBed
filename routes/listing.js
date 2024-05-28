@@ -40,7 +40,7 @@ router.post(
       country,
     });
     await newListing.save();
-    console.log("Sucess");
+    req.flash("success","New Listing Created");
     res.redirect("/listings");
   })
 );
@@ -86,6 +86,7 @@ router.put(
       location,
       country,
     });
+    req.flash("success","Review Updated");
     res.redirect(`/listings/${id}`);
   })
 );
@@ -96,7 +97,7 @@ router.delete(
   wrapAsync(async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
-    console.log(deletedListing);
+    req.flash("success","Listing Deleted");
     res.redirect("/listings");
   })
 );
