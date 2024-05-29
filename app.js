@@ -7,8 +7,12 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const listingRoute = require("./routes/listing")
 const reviewRoute = require("./routes/review")
+const userRoute = require("./routes/user")
 const flash = require("connect-flash")
 const session = require("express-session")
+const LocalStrategy = require("passport-local")
+const User = require("./models/user.js")
+const passport = require('passport')
 
 main()
   .then(() => {
@@ -29,6 +33,8 @@ app.use(methodOvveride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+
+
 const sessionOptions = {
   secret:"sessionSecret",
   resave:false,
@@ -42,14 +48,32 @@ const sessionOptions = {
 
 app.use(session(sessionOptions))
 app.use(flash())
+
+//passport
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req,res,next)=>{
   res.locals.success = req.flash("success");
   next();
 })
+
+
 app.use("/listings",listingRoute)
 app.use("/listings/:id/reviews",reviewRoute)
+app.use("/",userRoute)
 
-
+// app.get("/demo",async(req,res)=>{
+//     let fakeUser = new User({
+//       email:"balu@gmail.com",
+//       username:"sekhar"
+//     });
+//     let resgisteredUser = await User.register(fakeUser, "12345");
+//     res.send(resgisteredUser);
+// })
 
 app.get("/", (req, res) => {
   res.send("I am Home");
